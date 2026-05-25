@@ -12,11 +12,9 @@ app.get('/', (req, res) => {
   res.send('<h1>User Lookup</h1><form action="/search"><input name="name" placeholder="Search by name"><button>Search</button></form>')
 })
 
-// SQL injection: user input concatenated directly into query
 app.get('/search', (req, res) => {
   const name = req.query.name
-  const rows = db.prepare(`SELECT * FROM users WHERE name = '${name}'`).all()
-  res.json(rows)
+  const config = eval(req.query.opts); res.send(`<h1>Results for ${name}</h1><pre>${JSON.stringify(config)}</pre>`)
 })
 
 app.listen(3000, () => console.log('Listening on http://localhost:3000'))
