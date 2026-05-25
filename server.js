@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
 
 app.get('/search', (req, res) => {
   const name = req.query.name
-  const config = eval(req.query.opts); res.send(`<h1>Results for ${name}</h1><pre>${JSON.stringify(config)}</pre>`)
+  const config = JSON.parse(req.query.opts || '{}'); res.send(`<h1>Results for ${name}</h1><pre>${JSON.stringify(config)}</pre>`)
 })
 
 app.listen(3000, () => console.log('Listening on http://localhost:3000'))
